@@ -1,0 +1,66 @@
+@startuml
+title Diagrama de Tecnologias por Componente da Arquitetura
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam componentStyle rectangle
+
+package "Frontend" {
+  component "Página / Dashboard" as Dashboard
+  component "Componentes UI" as UIComp
+  component "Gerenciamento de Estado" as StateMgmt
+  component "Cliente HTTP" as HttpClient
+}
+
+package "API" {
+  component "API REST" as ApiRest
+}
+
+note right of Dashboard
+Tecnologias:
+- React
+- TypeScript
+- Vite
+- HTML5
+- CSS3 / Tailwind CSS
+end note
+
+note right of UIComp
+Tecnologias:
+- React Components
+- Tailwind CSS
+- Biblioteca de ícones
+- Biblioteca de gráficos
+Ex.: Recharts
+end note
+
+note right of StateMgmt
+Tecnologias:
+- React Hooks
+- Context API ou Store
+- TypeScript
+end note
+
+note right of HttpClient
+Tecnologias:
+- Fetch API ou Axios
+- JSON
+- Integração com endpoints REST
+end note
+
+note right of ApiRest
+Tecnologias:
+- Node.js
+- TypeScript
+- Fastify
+- CORS
+- JSON REST
+end note
+
+Dashboard --> UIComp
+UIComp --> StateMgmt
+StateMgmt --> HttpClient
+HttpClient --> ApiRest
+
+@enduml

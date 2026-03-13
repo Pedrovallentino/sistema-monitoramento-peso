@@ -1,0 +1,63 @@
+@startuml
+title Diagrama de Sequência - Monitoramento de Gás
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+actor "Usuário" as User
+participant "Frontend\n(React + TypeScript)" as Front
+participant "API REST\n(Fastify)" as API
+participant "Serviço de Regras\n(de negócio)" as Rules
+database "Estado Atual\n(memória / store)" as Store
+participant "Firmware\n(Pico W)" as Firmware
+participant "Sensor HX711\n/Célula de carga" as Sensor
+
+== Coleta e envio da telemetria ==
+
+loop A cada intervalo de leitura
+  Firmware -> Sensor : Ler peso bruto
+  Sensor --> Firmware : Valor bruto do sensor
+
+  Firmware -> Firmware : Calcular peso em kg\nMontar payload JSON
+
+  Firmware -> API : HTTPS POST /api/telemetry\nContent-Type: application/json\n{ deviceId, weightKg, swapDetected? }
+  activate API
+
+  API -> Rules : Validar payload e processar telemetria
+  activate Rules
+
+  Rules -> Store : Consultar estado anterior
+  Store --> Rules : Último peso / status / trocas
+
+  Rules -> Rules : Detectar troca de botijão\nAtualizar status e métricas
+
+  Rules -> Store : Persistir novo estado
+  Store --> Rules : Confirmação
+
+  Rules --> API : Resultado do processamento
+  deactivate Rules
+
+  API --> Firmware : HTTP 200 OK\n{ success: true }
+  deactivate API
+end
+
+== Consulta do dashboard pelo usuário ==
+
+User -> Front : Acessar dashboard
+
+Front -> API : HTTPS GET /api/status
+activate API
+
+API -> Store : Consultar estado atual
+Store --> API : Peso, porcentagem,\nstatus, trocas, última atualização
+
+API --> Front : HTTP 200 OK\nJSON com dados do sistema
+deactivate API
+
+Front -> Front : Atualizar interface\ncards, indicadores e gráficos
+Front --> User : Exibir dashboard atualizado
+
+@enduml

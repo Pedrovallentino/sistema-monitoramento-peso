@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <!-- Cores no estilo do seu dashboard -->
+    <linearGradient id="ring" x1="40" y1="40" x2="216" y2="216" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4fd1ff"></stop>
+      <stop offset="1" stop-color="#2b7bff"></stop>
+    </linearGradient>
+
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0" stop-color="#1b2a3d"></stop>
+      <stop offset="1" stop-color="#0c1320"></stop>
+    </radialGradient>
+
+    <linearGradient id="tank" x1="92" y1="70" x2="164" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2ee66b"></stop>
+      <stop offset="1" stop-color="#19b957"></stop>
+    </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.35"></feDropShadow>
+    </filter>
+  </defs>
+
+  <!-- Fundo -->
+  <circle cx="128" cy="128" r="120" fill="url(#bg)"></circle>
+
+  <!-- Anel externo -->
+  <circle cx="128" cy="128" r="92" fill="none" stroke="url(#ring)" stroke-width="16" stroke-linecap="round"></circle>
+
+  <!-- “Sinais” laterais (monitoramento) -->
+  <path d="M78 92 A68 68 0 0 0 78 164" fill="none" stroke="#69d9ff" stroke-width="14" stroke-linecap="round" opacity="0.95"></path>
+  <path d="M178 92 A68 68 0 0 1 178 164" fill="none" stroke="#69d9ff" stroke-width="14" stroke-linecap="round" opacity="0.95"></path>
+
+  <!-- Botijão -->
+  <g filter="url(#softShadow)">
+    <!-- Corpo -->
+    <rect x="92" y="98" width="72" height="96" rx="22" fill="url(#tank)"></rect>
+    <!-- “Cintura” -->
+    <rect x="92" y="142" width="72" height="10" rx="5" fill="#0f6c3a" opacity="0.45"></rect>
+    <!-- Base -->
+    <rect x="104" y="190" width="48" height="10" rx="5" fill="#0f6c3a" opacity="0.55"></rect>
+
+    <!-- Pescoço -->
+    <rect x="108" y="78" width="40" height="26" rx="8" fill="url(#tank)"></rect>
+    <!-- Válvula -->
+    <rect x="122" y="72" width="12" height="16" rx="4" fill="#0f6c3a" opacity="0.8"></rect>
+    <rect x="118" y="68" width="20" height="8" rx="4" fill="#0f6c3a" opacity="0.8"></rect>
+
+    <!-- Brilho (para não “apagar” no centro) -->
+    <path d="M104 116 C104 108 110 102 118 102" fill="none" stroke="#b8ffcf" stroke-width="10" stroke-linecap="round" opacity="0.35"></path>
+  </g>
+</svg>
