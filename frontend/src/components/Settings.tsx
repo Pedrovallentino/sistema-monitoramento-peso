@@ -21,15 +21,15 @@ export const Settings: React.FC = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
-      <div className="flex items-center gap-2 mb-6 border-b border-gray-100 dark:border-gray-700 pb-4">
-        <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Configurações</h3>
+    <div className="bg-white rounded-xl shadow p-6">
+      <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-4">
+        <h3 className="text-xl font-semibold text-gray-800">Configurações</h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Peso do Botijão Vazio (Tara)
             </label>
             <input
@@ -37,12 +37,12 @@ export const Settings: React.FC = () => {
               name="tareWeight"
               value={localSettings.tareWeight}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Peso do Gás (Líquido)
             </label>
             <input
@@ -50,21 +50,21 @@ export const Settings: React.FC = () => {
               name="netWeight"
               value={localSettings.netWeight}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Unidade de Medida
             </label>
             <select
               name="unit"
               value={localSettings.unit}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
             >
               <option value="kg">Quilogramas (kg)</option>
               <option value="lb">Libras (lb)</option>
@@ -72,7 +72,7 @@ export const Settings: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Intervalo de Atualização (ms)
             </label>
             <input
@@ -82,18 +82,18 @@ export const Settings: React.FC = () => {
               onChange={handleChange}
               step="100"
               min="500"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
       </div>
 
-      <div className="mt-8 flex justify-between items-center pt-4 border-t border-gray-100 dark:border-gray-700">
+      <div className="mt-8 flex justify-between items-center pt-4 border-t border-gray-100">
         <button
           onClick={() => {
             if(confirm('Tem certeza que deseja limpar todo o histórico?')) clearHistory();
           }}
-          className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+          className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
         >
           <RefreshCw size={18} />
           Resetar Histórico
