@@ -52,5 +52,5 @@ Estrutura dos casos de uso baseada em ator, objetivo, resumo do fluxo e rastreab
 **Observação:** O backend não expõe `deviceId` no status atual.
 
 **RF Relacionados:** [RF-09](requisitos-funcionais.md#rf-09), [RF-05](requisitos-funcionais.md#rf-05)
-**RNF Relacionados:** [RNF-07](requisitos-nao-funcionais.md#rnf-07)
+**RNF Relacionados:** [RNF-06](requisitos-nao-funcionais.md#rnf-06)
 **Histórias Relacionadas:** [HU-05](historias-de-usuario.md#hu-05)
