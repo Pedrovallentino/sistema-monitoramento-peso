@@ -66,7 +66,16 @@ TARE_WEIGHT_KG=15.0
 NET_WEIGHT_KG=13.0
 GAS_SWAP_THRESHOLD_KG=5
 TELEMETRY_SIM_INTERVAL_MS=1000
-TELEMETRY_SIM_CONSUMPTION_KG_PER_SEC=0.05
+# Taxa "realista" de consumo (em kg/dia). A simulação usa isso junto com `TELEMETRY_SIM_TIME_SCALE`.
+TELEMETRY_SIM_CONSUMPTION_KG_PER_DAY=0.4
+
+# Acelera o tempo da simulação para fins de demonstração:
+# - timeScale=32 => leva o peso do "cheio" ao "vazio" em ~1 dia (com defaults de tara/líquido)
+TELEMETRY_SIM_TIME_SCALE=32
+
+# (Legado) Se você setar `TELEMETRY_SIM_CONSUMPTION_KG_PER_SEC`, ele terá prioridade
+# sobre os valores de kg/dia/timeScale.
+# TELEMETRY_SIM_CONSUMPTION_KG_PER_SEC=
 ```
 
 ## 📦 Instalação
