@@ -30,7 +30,7 @@ function App() {
         setLatency(end - start);
         
         // Update store with new data
-        updateSwapData(data.gasSwapCount, data.weightKg);
+        updateSwapData(data.swapCount, data.weightKg);
         addReading(data.weightKg);
         
       } catch (error) {
@@ -57,7 +57,11 @@ function App() {
               
               {/* Center Column: Hero Status Card (Mobile: 1st, Tablet: Full Width or 1st, Desktop: Center) */}
               <div className="order-1 xl:order-2 md:col-span-2 xl:col-span-1 h-full min-h-[350px] md:min-h-[400px]">
-                <GasStatusCard currentWeight={status?.weightKg ?? 0} />
+                <GasStatusCard
+                  weightKg={status?.weightKg ?? 0}
+                  gasPercentage={status?.gasPercentage ?? 0}
+                  statusText={status?.status ?? 'Nível Crítico'}
+                />
               </div>
 
               {/* Left Column: Quick Stats (Mobile: 2nd, Tablet: 1st row left, Desktop: Left) */}
@@ -88,7 +92,7 @@ function App() {
                     <div className="space-y-4 md:space-y-6">
                       <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl">
                         <span className="text-gray-600 font-medium text-sm md:text-base">Trocas Detectadas</span>
-                        <span className="font-bold text-xl md:text-2xl text-gray-800">{status?.gasSwapCount ?? 0}</span>
+                        <span className="font-bold text-xl md:text-2xl text-gray-800">{status?.swapCount ?? 0}</span>
                       </div>
                       
                       <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl">

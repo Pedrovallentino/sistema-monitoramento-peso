@@ -1,21 +1,27 @@
 import React from 'react';
 import { Fuel, Droplets, AlertTriangle } from 'lucide-react';
-import { calculatePercentage, getStatusColor, getStatusText } from '../utils/gasHelpers';
+import { getStatusColor } from '../utils/gasHelpers';
 import { useGasStore } from '../store/useGasStore';
 import clsx from 'clsx';
 
+/**
+ * Peculiaridades:
+ * - `gasPercentage` e `statusText` vêm diretamente do backend (`GET /api/status`).
+ * - A UI não recalcula o nível de gás para evitar duplicação do estado/derivações.
+ */
 interface GasStatusCardProps {
-  currentWeight: number;
+  weightKg: number;
+  gasPercentage: number;
+  statusText: string;
 }
 
-export const GasStatusCard: React.FC<GasStatusCardProps> = ({ currentWeight }) => {
+export const GasStatusCard: React.FC<GasStatusCardProps> = ({ weightKg, gasPercentage, statusText }) => {
   const { settings } = useGasStore();
-  const percentage = calculatePercentage(currentWeight, settings.tareWeight, settings.netWeight);
+  const percentage = gasPercentage;
   const color = getStatusColor(percentage);
-  const statusText = getStatusText(percentage);
 
   // Calculate gas weight only
-  const gasWeight = Math.max(0, currentWeight - settings.tareWeight);
+  const gasWeight = Math.max(0, weightKg - settings.tareWeight);
 
   // Determine status level for styling
   const statusLevel = percentage > 40 ? 'high' : percentage > 20 ? 'medium' : 'low';
@@ -106,7 +112,7 @@ export const GasStatusCard: React.FC<GasStatusCardProps> = ({ currentWeight }) =
         <div className="bg-gray-50 p-3 md:p-4 rounded-xl border border-gray-100 transition-colors hover:bg-gray-100">
           <p className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Peso Bruto</p>
           <p className="text-lg md:text-2xl font-bold text-gray-800 tabular-nums">
-            {currentWeight.toFixed(2)}
+            {weightKg.toFixed(2)}
             <span className="text-xs md:text-sm font-medium text-gray-400 ml-1">{settings.unit}</span>
           </p>
         </div>

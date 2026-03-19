@@ -2,6 +2,12 @@ import React from 'react';
 import { Terminal, Wifi, Activity, Cpu } from 'lucide-react';
 import clsx from 'clsx';
 
+/**
+ * Peculiaridades:
+ * - O backend `/api/status` não retorna `deviceId`.
+ * - Para depuração, este painel usa `rawData.dataSource` para indicar se a origem é
+ *   `simulation` ou `firmware`.
+ */
 interface TechnicalPanelProps {
   rawData: any;
   latencyMs: number;
@@ -46,10 +52,10 @@ export const TechnicalPanel: React.FC<TechnicalPanelProps> = ({
           <div className="flex items-center justify-between p-3 bg-slate-50 rounded border border-gray-200">
             <div className="flex items-center gap-2">
               <Cpu size={16} className="text-purple-600" />
-              <span>Device ID</span>
+              <span>Fonte de Dados</span>
             </div>
             <span className="font-bold text-purple-600">
-              {rawData?.deviceId || "N/A (Backend Missing)"}
+              {rawData?.dataSource || "N/A"}
             </span>
           </div>
 

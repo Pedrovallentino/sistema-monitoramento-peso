@@ -1,11 +1,16 @@
 import axios from 'axios';
 
-const API_URL = 'https://monitoramento-de-peso-api.onrender.com/api';
+// Permite rodar localmente apontando para o backend (ex: `VITE_API_URL=http://localhost:3000/api`).
+// Mantém o fallback para o deploy existente para não quebrar ambientes já configurados.
+const API_URL = import.meta.env.VITE_API_URL ?? 'https://monitoramento-de-peso-api.onrender.com/api';
 
 export interface DeviceStatus {
   weightKg: number;
   lastUpdate: number;
-  gasSwapCount: number;
+  gasPercentage: number;
+  status: string;
+  swapCount: number;
+  dataSource?: 'simulation' | 'firmware';
 }
 
 export const api = {

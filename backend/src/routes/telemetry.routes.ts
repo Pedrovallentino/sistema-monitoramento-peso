@@ -1,6 +1,14 @@
 import { FastifyInstance } from 'fastify';
 import { telemetryService } from '../services/telemetry.service';
 
+/**
+ * Endpoint protegido de ingestão.
+ *
+ * Peculiaridades:
+ * - A rota chama `telemetryService.processMeasurement(...)` para garantir que firmware real
+ *   e simulação atravessem o MESMO fluxo de negócio.
+ * - O parâmetro `dataSource` é fixado como `'firmware'` aqui (para depuração via `/api/status`).
+ */
 interface TelemetryPayload {
   deviceId: string;
   weightKg: number;
@@ -29,7 +37,7 @@ export async function telemetryRoutes(fastify: FastifyInstance) {
 
     // 3. Update State
     try {
-      telemetryService.updateWeight(weightKg);
+      telemetryService.processMeasurement(weightKg, 'firmware');
       // Log for debug
       // console.log(`Received telemetry from ${deviceId}: ${weightKg}kg`);
       

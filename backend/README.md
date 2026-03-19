@@ -54,6 +54,19 @@ PORT=3000
 
 # Chave de Segurança para Telemetria (Defina uma string forte)
 API_KEY=MINHA_CHAVE_SECRETA_FORTE
+
+# =========================
+# Simulação (sem hardware)
+# =========================
+# true => inicia um simulador que alimenta o mesmo fluxo de processamento do firmware
+ENABLE_SIMULATION=false
+
+# Ajustes opcionais (valores padrão seguem o frontend)
+TARE_WEIGHT_KG=15.0
+NET_WEIGHT_KG=13.0
+GAS_SWAP_THRESHOLD_KG=5
+TELEMETRY_SIM_INTERVAL_MS=1000
+TELEMETRY_SIM_CONSUMPTION_KG_PER_SEC=0.05
 ```
 
 ## 📦 Instalação
@@ -100,7 +113,7 @@ Recebe atualizações de peso do dispositivo.
 
 ### 2. Status Atual (Para Frontend)
 
-Retorna o último peso registrado e o timestamp da atualização.
+Retorna o estado atual consolidado para o frontend.
 
 *   **URL:** `/api/status`
 *   **Método:** `GET`
@@ -109,7 +122,11 @@ Retorna o último peso registrado e o timestamp da atualização.
     ```json
     {
       "weightKg": 12.45,
-      "lastUpdate": 1734350400
+      "gasPercentage": 62.0,
+      "status": "Nível Adequado",
+      "swapCount": 3,
+      "lastUpdate": 1734350400,
+      "dataSource": "firmware"
     }
     ```
 
